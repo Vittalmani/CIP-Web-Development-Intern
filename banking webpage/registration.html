@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bank Account Registration</title>
+    <link rel="icon" href="BOC.png" type="image/icon type">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+        }
+        header {
+    
+            width:auto;
+    background-color: #333;
+    padding: 20px;
+    color: #ffffff;
+    font-weight: bolder;
+    
+    }
+        .container {
+            max-width: 400px;
+            margin: 2% AUTO;
+            margin-top: 10%;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f2f2f2;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+  footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+  }
+  
+    </style>
+</head>
+<body>
+    <header> <H1>Bank of Cave</H1> </header>
+    <div class="container">
+        <h2>Bank Account Registration</h2>
+        <form id="registration-form">
+            <div class="form-group">
+                <label for="fullname">Full Name:</label>
+                <input type="text" id="fullname" required>
+                <span id="fullname-error" class="error"></span>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="text" id="email" required>
+                <span id="email-error" class="error"></span>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" required>
+                <span id="password-error" class="error"></span>
+            </div>
+            <div class="form-group">
+                <label for="confirm-password">Confirm Password:</label>
+                <input type="password" id="confirm-password" required>
+                <span id="confirm-password-error" class="error"></span>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number:</label>
+                <input type="text" id="phone" required>
+                <span id="phone-error" class="error"></span>
+            </div>
+            <input type="submit" value="Register">
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('registration-form').addEventListener('submit', function(event) {
+            var fullname = document.getElementById('fullname').value;
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+            var confirmPassword = document.getElementById('confirm-password').value;
+            var phone = document.getElementById('phone').value;
+
+            var valid = true;
+
+            if (fullname.trim() === '') {
+                document.getElementById('fullname-error').textContent = 'Please enter your full name.';
+                valid = false;
+            } else {
+                document.getElementById('fullname-error').textContent = '';
+            }
+
+            if (email.trim() === '') {
+                document.getElementById('email-error').textContent = 'Please enter your email.';
+                valid = false;
+            } else {
+                document.getElementById('email-error').textContent = '';
+            }
+
+            if (password.trim() === '') {
+                document.getElementById('password-error').textContent = 'Please enter a password.';
+                valid = false;
+            } else {
+                document.getElementById('password-error').textContent = '';
+            }
+
+            if (confirmPassword.trim() === '') {
+                document.getElementById('confirm-password-error').textContent = 'Please confirm your password.';
+                valid = false;
+            } else if (password !== confirmPassword) {
+                document.getElementById('confirm-password-error').textContent = 'Passwords do not match.';
+                valid = false;
+            } else {
+                document.getElementById('confirm-password-error').textContent = '';
+            }
+
+            if (phone.trim() === '') {
+                document.getElementById('phone-error').textContent = 'Please enter your phone number.';
+                valid = false;
+            } else {
+                document.getElementById('phone-error').textContent = '';
+            }
+
+            if (!valid) {
+                event.preventDefault();
+            }
+        });
+    </script>
+     <footer>
+        <p>&copy; 2023 Bank of Cave. All rights reserved.</p>
+      </footer>
+</body>
+</html>
