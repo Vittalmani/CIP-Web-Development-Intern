@@ -1,0 +1,80 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+  }
+  
+
+  h1 {
+    color: #ffffff;
+    
+  }
+  
+  .main {
+    display: grid;
+    grid-template-areas: 
+    " head  head head"
+    "content aside aside"
+    "foot foot foot";
+    grid-template-rows: 100px auto 100px;
+    grid-template-columns:  40% 40% 20%    ;
+    }
+    header{
+        padding: 20px;
+        font-weight: bold;
+        background-color: black;
+        grid-area: head;
+    }
+    article{box-shadow: 10px 30px 60px rgb(19, 212, 190);
+    align-items:left;
+    margin: 10%;
+    padding-top: 50%;
+
+    padding-bottom: 30%;
+        margin-right: 20px;
+        grid-area: content;
+    }
+   section {
+    margin: 5%;
+    box-shadow: 10px 30px 60px rgb(122, 203, 1);
+      grid-area: aside;
+    }
+    footer{color: #ffffff;
+      padding: 5%;
+        font-weight: bold;
+        text-align: center;
+        background-color: black;
+        grid-area: foot;
+    }
+  #input {
+    margin-top: 20px;
+  }
+  #text-input{
+    font-size: 0.8rem;
+    border-color: black;
+    padding: 5% 15%;
+  }
+  article button{
+    background-color: hsl(0, 0%, 0%);
+    color: #ffffff;
+    font-weight: bolder;
+    padding: 15px;
+  }
+  article button:hover{
+    box-shadow: 10px 3px 20px rgb(253, 131, 1);
+    color: #ff0000;
+  }
+  
+  #output {
+
+    margin-top: 20px;
+  }
+  
+  #qrcode {
+    margin-top: 10%;
+    margin-left: 20%;
+    display: block;
+  
+  }
+  
