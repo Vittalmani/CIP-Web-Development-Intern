@@ -1,32 +1,11 @@
-// Auto Typing Animation
-const roles = ["A UI/UX Designer", "A Frontend Web Developer"];
-let currentRoleIndex = 0;
-let currentRole = "";
-
-function autoType() {
-  if (currentRoleIndex >= roles.length) {
-    currentRoleIndex = 0;
-  }
-  currentRole = roles[currentRoleIndex];
-  document.getElementById("role").textContent = "";
-  typeCharacter();
-}
-
-function typeCharacter() {
-  if (currentRole.length > 0) {
-    document.getElementById("role").textContent += currentRole.charAt(0);
-    currentRole = currentRole.slice(1);
-    setTimeout(typeCharacter, 100);
-  } else {
-    setTimeout(autoType, 2000); // Pause before typing next role
-    currentRoleIndex++;
-  }
-}
-
-// Start the auto typing animation
-autoType();
-
-
-
-
-
+const projects = window.PORTFOLIO_PROJECTS || [];
+const esc = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const toggle = document.getElementById('theme-toggle');
+function syncTheme(){const dark=document.documentElement.dataset.theme==='dark';toggle.setAttribute('aria-label',`Switch to ${dark?'light':'dark'} theme`);toggle.setAttribute('aria-pressed',String(dark));}
+syncTheme();toggle.addEventListener('click',()=>{const theme=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=theme;try{localStorage.setItem('portfolio-theme',theme)}catch(e){}syncTheme()});
+document.getElementById('year').textContent=new Date().getFullYear();
+const grid=document.getElementById('project-grid');
+function render(filter='All'){grid.innerHTML=projects.filter(p=>filter==='All'||p.category===filter).map(p=>`<a class="project-card ${p.id}" href="project.html?id=${p.id}"><div class="project-art" aria-hidden="true"><span class="art-label">${p.category}</span><span class="art-symbol">${({analyst:'SQL →', 'vision-rag':'VISION +',vehicle:'[ OCR ]',accident:'DETECT /'})[p.id]}</span><span class="art-caption">${p.tags.slice(0,2).join(' / ')}</span></div><div class="project-body"><div class="project-heading"><span class="small">PROJECT ${p.number}</span><span>↗</span></div><h3>${esc(p.title)}</h3><p>${esc(p.summary)}</p><div class="tags">${p.tags.map(t=>`<span>${esc(t)}</span>`).join('')}</div><span class="case-link">Explore project →</span></div></a>`).join('')}
+if(grid){render();document.querySelectorAll('[data-filter]').forEach(button=>button.addEventListener('click',()=>{document.querySelectorAll('[data-filter]').forEach(b=>{b.classList.toggle('active',b===button);b.setAttribute('aria-pressed',String(b===button))});render(button.dataset.filter)}))}
+const detail=document.getElementById('project-detail');
+if(detail){const p=projects.find(p=>p.id===new URLSearchParams(location.search).get('id'));if(!p){detail.innerHTML='<h1>Project not found.</h1><p>Select a project from the portfolio homepage.</p>'}else{document.title=p.title+' | Vittal Mani Bobbili';detail.innerHTML=`<p class="eyebrow detail-eyebrow">${esc(p.category)} / PROJECT ${p.number}</p><h1>${esc(p.title)}</h1><p class="detail-lede">${esc(p.summary)}</p><div class="tags">${p.tags.map(t=>`<span>${esc(t)}</span>`).join('')}</div>${p.repo?`<p><a class="button" href="${p.repo}">View source code ↗</a></p>`:''}<div class="detail-layout"><div><section><h2>The problem</h2><p>${esc(p.problem)}</p></section><section><h2>The approach</h2><p>${esc(p.approach)}</p><ol class="workflow">${p.steps.map(s=>`<li>${esc(s)}</li>`).join('')}</ol></section><section><h2>Results & evidence</h2><p>${esc(p.result)}</p></section><section><h2>Limitations & next steps</h2><p>${esc(p.next)}</p></section></div><aside><p class="eyebrow">PROJECT STATUS</p><p>${esc(p.status)}</p><hr><p class="small">This page distinguishes described work from publicly inspected implementation. Results are scoped to the component evaluated.</p></aside></div>`}}
